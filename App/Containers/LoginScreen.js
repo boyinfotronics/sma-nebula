@@ -213,7 +213,7 @@ class LoginScreen extends React.Component {
 <View style={{ justifyContent:'center'}}>
 
       <FBLogin
-       style={{ marginTop: 5 }}
+       style={{ marginTop: 6 }}
        ref={(fbLogin) => { this.fbLogin = fbLogin }}
        permissions={["email","user_friends"]}
        loginBehavior={FBLoginManager.LoginBehaviors.Native}
