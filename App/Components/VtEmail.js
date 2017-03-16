@@ -77,7 +77,7 @@ if (this.validateEmail(this.state.email)) {
          keyboardType="email-address"
          label={this.props.label}
          placeholder={this.props.label}
-         placeholderTextColor="#B40402"
+         placeholderTextColor="#B40400"
          style={Styles2.input}
          underlineColorAndroid='transparent'
          onChangeText={(text) => this.setState({ email: text })}
