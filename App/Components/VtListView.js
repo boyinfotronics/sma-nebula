@@ -10,6 +10,8 @@ import Styles from './Styles/VtStyle'
 import Styles2 from '../Containers/Styles/LoginScreenStyle'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialsIcon from 'react-native-vector-icons/MaterialIcons';
+import ResponsiveImage from 'react-native-responsive-image';
+import FitImage from 'react-native-fit-image';
 // Example
 
 const place = require('../Images/place.png');
@@ -43,7 +45,12 @@ export default class VtListView extends React.Component {
                   </Left>
                 </CardItem>
                 <CardItem cardBody>
-                    <Image style={{width: 380, height: 220}} source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}/>
+
+                <FitImage
+                  resizeMode="contain"
+                  source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }}
+                />
+                 
                 </CardItem>
                 <CardItem content>
                     <Text>{this.props.location_tks_locationdetail}</Text>

@@ -14,6 +14,8 @@ import Styles from './Styles/LoginScreenStyle'
 import styles from './Styles/PresentationScreenStyle'
 import renderIf from '../Components/renderIf'
 
+
+
 var api = {
       getRec() {
         var url = 'https://devsma.idefenc.com/api/records/Location/all'
@@ -32,6 +34,7 @@ export default class SingupScreen extends React.Component {
   super(props);
   this.state = {
   result: [],
+  checkRender: 0,
   location_tks_locationname:'',
   location_tks_locationdetail:'',
     }
@@ -47,6 +50,8 @@ export default class SingupScreen extends React.Component {
 
   render () {
 
+  if(this.state.checkRender==0)
+  {
     contents = this.state.result.map(function (item) {
         return (
             <View>
@@ -62,22 +67,37 @@ export default class SingupScreen extends React.Component {
             </View>
         );
      });
+   }
 
+   if(this.state.checkRender==1)
+   {
+     contents = this.state.result.map(function (item) {
+         return (
+             <View>
+
+                 {renderIf(item.locationno.length > 1,
+                     <VtListView
+                         location_tks_locationname= {item.location_tks_locationname}
+                         location_tks_locationdetail= {item.location_tks_locationdetail}
+                     />
+                 )}
+
+
+             </View>
+         );
+      });
+    }
     return (
-
       <Image source={Images.naturebg2} style={styles.backgroundImage}>
         <ScrollView style={styles.container}>
-  <View style={Styles.form}>
-          <View style={styles.section2} >
+  <View style={Styles.bodylistview}>
+          <View style={styles.section3} >
           { /*<Text style={styles.sectionText} >
               {"\n\n\n"}
             </Text> */}
           </View>
-
-          {contents}
-
-
-</View>
+                   {contents}
+          </View>
         </ScrollView>
         </Image>
 

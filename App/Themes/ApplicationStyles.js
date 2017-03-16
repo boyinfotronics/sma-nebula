@@ -45,6 +45,14 @@ const ApplicationStyles = {
       borderBottomColor: Colors.frost,
       borderBottomWidth: 0
     },
+    section3: {
+      marginTop: 10,
+      padding: 15,
+      borderTopColor: Colors.frost,
+      borderTopWidth: 0,
+      borderBottomColor: Colors.frost,
+      borderBottomWidth: 0
+    },
     sectionText: {
       color: Colors.snow,
       marginVertical: Metrics.smallMargin,

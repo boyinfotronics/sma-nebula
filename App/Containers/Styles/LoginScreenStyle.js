@@ -13,6 +13,12 @@ export default StyleSheet.create({
     marginTop: 20,
     marginVertical: 15,
   },
+  bodylistview: {
+    backgroundColor: Colors.transparent2,
+    borderRadius: 2,
+    marginTop: 2,
+    marginVertical: 2,
+  },
   row: {
     paddingVertical: 13,
     paddingHorizontal: Metrics.doubleBaseMargin
