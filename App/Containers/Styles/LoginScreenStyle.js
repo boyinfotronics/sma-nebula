@@ -1,5 +1,3 @@
-// @flow
-
 import { StyleSheet } from 'react-native'
 import { Colors, Metrics } from '../../Themes'
 
@@ -11,7 +9,9 @@ export default StyleSheet.create({
     backgroundColor: Colors.transparent2,
     marginLeft: 15,
     marginRight: 15,
-    borderRadius: 11
+    borderRadius: 2,
+    marginTop: 20,
+    marginVertical: 15,
   },
   row: {
     paddingVertical: 13,
@@ -55,7 +55,8 @@ export default StyleSheet.create({
   },
   topLogo: {
     alignSelf: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
+    marginTop: 25
   },
   markWrap: {
     flex: 1,
