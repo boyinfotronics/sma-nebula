@@ -1,3 +1,4 @@
+
 import React from 'react'
 import {
   View,
@@ -156,8 +157,6 @@ class LoginScreen extends React.Component {
         <Image source={Images.naturebg2} style={styles.backgroundImage}>
         <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps>
         <Image source={Images.sma} style={[Styles.topLogo, this.state.topLogo]} />
-        <Text>{"\n"}</Text>
-
 
         <View style={Styles.form}>
         <View style={Styles.inputWrap}>
@@ -187,7 +186,7 @@ class LoginScreen extends React.Component {
               </View>
 
 
-<Text>{"\n"}</Text>
+              <Text>{"\n"}</Text>
             <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.LoginCheck}>
               <View style={Styles.loginButton}>
                 <Text style={Styles.loginText}>{I18n.t('signIn')}</Text>
@@ -211,14 +210,15 @@ class LoginScreen extends React.Component {
          </RoundedButton> */
        }
 
+<View style={{ justifyContent:'center'}}>
 
-      <FBLogin iconLeft block
-       style={{ marginTop: 9 }}
+      <FBLogin
+       style={{ marginTop: 5 }}
        ref={(fbLogin) => { this.fbLogin = fbLogin }}
        permissions={["email","user_friends"]}
        loginBehavior={FBLoginManager.LoginBehaviors.Native}
        onLogin={function(data){
-        //  NavigationActions.presentationScreen();
+        NavigationActions.presentationScreen();
          console.log("Logged in!");
          console.log(data);
        }}
@@ -247,6 +247,7 @@ class LoginScreen extends React.Component {
          console.log(data);
        }}
        />
+   </View>
 
 
                   <Content>
