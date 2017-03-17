@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Scene, Router } from 'react-native-router-flux'
+import { Scene, Router, ActionConst  } from 'react-native-router-flux'
 import Styles from './Styles/NavigationContainerStyle'
 import NavigationDrawer from './NavigationDrawer'
 import NavItems from './NavItems'
@@ -45,7 +45,8 @@ class NavigationRouter extends Component {
           <Scene key='listviewSearchingExample' component={ListviewSearchingExample} title='Listview Searching' navBar={CustomNavBar} />
           <Scene key='mapviewExample' component={MapviewExample} title='Mapview' />
           <Scene key='apiTesting' component={APITestingScreen} title='API Testing' />
-          <Scene key='listviewDynamic' component={ListViewDynamic} title='ListViewDynamic' />
+          <Scene key='listviewDynamic' component={ListViewDynamic} type={ActionConst.REPLACE} title='ListViewDynamic'renderLeftButton={NavItems.hamburgerButton}  renderRightButton={NavItems.refreshButton}/>
+          <Scene key='listviewDynamic2' component={ListViewDynamic} type={ActionConst.REPLACE} title='ListViewDynamic' renderLeftButton={NavItems.hamburgerButton} renderRightButton={NavItems.refreshButton1}/>
           <Scene key='theme' component={ThemeScreen} title='Theme' />
             {/*   <Scene initial key='presentationScreen' component={PresentationScreen} title='SMA' renderLeftButton={NavItems.hamburgerButton} />*/}
             {/* Custom navigation bar example */}

@@ -6,7 +6,8 @@ import styles from './Styles/NavItemsStyle'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Colors, Metrics } from '../Themes'
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { ActionX } from 'react-native-mobx'
 
 const openDrawer = () => {
   NavigationActions.refresh({
@@ -15,7 +16,19 @@ const openDrawer = () => {
   })
 }
 
+const newRefresh = () => {
+  NavigationActions.listviewDynamic2()
+}
+
+const newRefresh1 = () => {
+  NavigationActions.listviewDynamic()
+}
+
+
+
 export default {
+
+
   backButton () {
     return (
       <TouchableOpacity onPress={NavigationActions.pop}>
@@ -57,6 +70,30 @@ export default {
       <TouchableOpacity>
         <Icon name='map-marker'
           size={Metrics.icons.small}
+          color={Colors.snow}
+
+        />
+      </TouchableOpacity>
+    )
+  },
+
+  refreshButton () {
+    return (
+      <TouchableOpacity onPress={ newRefresh }>
+        <Icon name='refresh'
+          size={Metrics.icons.vsmall}
+          color={Colors.snow}
+
+        />
+      </TouchableOpacity>
+    )
+  },
+
+  refreshButton1 () {
+    return (
+      <TouchableOpacity onPress={ newRefresh1 }>
+        <Icon name='refresh'
+          size={Metrics.icons.vsmall}
           color={Colors.snow}
 
         />
