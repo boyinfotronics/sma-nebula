@@ -210,7 +210,7 @@ class LoginScreen extends React.Component {
          </RoundedButton> */
        }
 
-<View style={{ marginLeft: 200}}>
+<View style={{ flexDirection: 'column' }}>
 
       <FBLogin
        style={{ marginTop: 6 }}
