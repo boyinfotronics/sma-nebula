@@ -38,6 +38,7 @@ export default class SingupScreen extends React.Component {
   location_tks_locationname:'',
   location_tks_locationdetail:'',
   image_url:'',
+  province:'',
     }
   }
 
@@ -62,6 +63,7 @@ export default class SingupScreen extends React.Component {
                         location_tks_locationname= {item.location_tks_locationname}
                         location_tks_locationdetail= {item.location_tks_locationdetail}
                         image_url= {item.cf_778}
+                        province={item.cf_772}
                     />
                 )}
 

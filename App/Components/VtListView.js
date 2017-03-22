@@ -27,6 +27,7 @@ type VtListViewProps = {
      location_tks_locationname: string,
      location_tks_locationdetail: string,
      image_url: URL,
+     province: string,
 }
 
 export default class VtListView extends React.Component {
@@ -41,7 +42,7 @@ export default class VtListView extends React.Component {
                       <Thumbnail source={place} />
                       <Body>
                           <Text>{this.props.location_tks_locationname}</Text>
-                          <Text note>Infotronics</Text>
+                          <Text>{this.props.province}</Text>
                       </Body>
                   </Left>
                 </CardItem>
@@ -49,7 +50,7 @@ export default class VtListView extends React.Component {
 
                 <FitImage
                   resizeMode="contain"
-                  source={{ uri: '{this.props.image_url}' }}
+                  source={{ uri: 'https://s-media-cache-ak0.pinimg.com/originals/c1/3d/f6/c13df6941828a10c3d1430e202722f14.jpg' }}
                 />
 
                 </CardItem>

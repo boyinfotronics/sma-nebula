@@ -17,6 +17,10 @@ class NavigationDrawer extends Component {
     const children = state.children
     return (
       <Drawer
+      content={<DrawerContent />}
+        ref='navigation'
+        type='overlay'
+        styles={Styles}
         open={state.open}
         onOpen={() => NavigationActions.refresh({key: state.key, open: true})}
         onClose={() => NavigationActions.refresh({key: state.key, open: false})}
