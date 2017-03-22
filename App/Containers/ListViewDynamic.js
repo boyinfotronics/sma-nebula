@@ -37,6 +37,7 @@ export default class SingupScreen extends React.Component {
   checkRender: 0,
   location_tks_locationname:'',
   location_tks_locationdetail:'',
+  image_url:'',
     }
   }
 
@@ -60,6 +61,7 @@ export default class SingupScreen extends React.Component {
                     <VtListView
                         location_tks_locationname= {item.location_tks_locationname}
                         location_tks_locationdetail= {item.location_tks_locationdetail}
+                        image_url= {item.cf_778}
                     />
                 )}
 

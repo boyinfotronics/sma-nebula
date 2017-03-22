@@ -26,6 +26,7 @@ ExamplesRegistry.add('Full Button', () =>
 type VtListViewProps = {
      location_tks_locationname: string,
      location_tks_locationdetail: string,
+     image_url: URL,
 }
 
 export default class VtListView extends React.Component {
@@ -48,9 +49,9 @@ export default class VtListView extends React.Component {
 
                 <FitImage
                   resizeMode="contain"
-                  source={{ uri: 'https://facebook.github.io/react/img/logo_og.png' }}
+                  source={{ uri: '{this.props.image_url}' }}
                 />
-                 
+
                 </CardItem>
                 <CardItem content>
                     <Text>{this.props.location_tks_locationdetail}</Text>

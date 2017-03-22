@@ -17,14 +17,11 @@ class NavigationDrawer extends Component {
     const children = state.children
     return (
       <Drawer
-        ref='navigation'
-        type='overlay'
         open={state.open}
         onOpen={() => NavigationActions.refresh({key: state.key, open: true})}
         onClose={() => NavigationActions.refresh({key: state.key, open: false})}
-        styles={Styles}
         openDrawerOffset={0.2}
-        tweenDuration={100}
+        tweenDuration={50}
         tweenHandler={(ratio) => ({
           main: { opacity: Math.max(0.1, 1 - ratio) }
         })}
