@@ -17,7 +17,7 @@ class NavigationDrawer extends Component {
     const children = state.children
     return (
       <Drawer
-      content={<DrawerContent />}
+        content={<DrawerContent />}
         ref='navigation'
         type='overlay'
         styles={Styles}

@@ -26,7 +26,7 @@ ExamplesRegistry.add('Full Button', () =>
 type VtListViewProps = {
      location_tks_locationname: string,
      location_tks_locationdetail: string,
-     image_url: URL,
+     image_url: media,
      province: string,
 }
 

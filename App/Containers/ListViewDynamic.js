@@ -1,110 +1,181 @@
-import React from 'react'
-import { ScrollView, Text, Image, View, Alert } from 'react-native'
-import { Images } from '../Themes'
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+  Image,
+  ScrollView,
+  AppRegistry
+} from 'react-native';
+
+import FitImage from 'react-native-fit-image';
 import { Container, Content, Card, CardItem, Footer, FooterTab, Left, Right, Body, Thumbnail, Button, Icon, ListItem } from 'native-base'
-import RoundedButton from '../Components/RoundedButton'
-import VtListView from '../Components/VtListView'
-import VtString from '../Components/VtString'
-import VtDate from '../Components/VtDate'
-import VtMail from '../Components/VtMail'
-import VtEmail from '../Components/VtEmail'
-import VtPassword from '../Components/VtPassword'
-import { Actions as NavigationActions } from 'react-native-router-flux'
-import Styles from './Styles/LoginScreenStyle'
-import styles from './Styles/PresentationScreenStyle'
-import renderIf from '../Components/renderIf'
-
-
-
-var api = {
-      getRec() {
-        var url = 'https://devsma.idefenc.com/api/records/Location/all'
-        return fetch(url).then((res) => res.json());
-      }
-
-};
-
-const onButtonPress = () => {
-  Alert.alert('สมัครสมาชิกแล้ว');
-};
-
-export default class SingupScreen extends React.Component {
-
-  constructor(props){
-  super(props);
-  this.state = {
-  result: [],
-  checkRender: 0,
-  location_tks_locationname:'',
-  location_tks_locationdetail:'',
-  image_url:'',
-  province:'',
-    }
+import GiftedListView from 'react-native-gifted-listview';
+import API from '../Components/api';
+export default class ListViewDynamic extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      movieCount: 0
+    };
+    this.onFetch = this.onFetch.bind(this);
   }
 
-  componentWillMount(){
-  api.getRec().then((res) => {
-      this.setState ({
-          result:res.result,
-      })
-  });
-  }
-
-  render () {
-
-  if(this.state.checkRender==0)
-  {
-    contents = this.state.result.map(function (item) {
-        return (
-            <View>
-
-                {renderIf(item.locationno.length > 1,
-                    <VtListView
-                        location_tks_locationname= {item.location_tks_locationname}
-                        location_tks_locationdetail= {item.location_tks_locationdetail}
-                        image_url= {item.cf_778}
-                        province={item.cf_772}
-                    />
-                )}
-
-
-            </View>
-        );
-     });
-   }
-
-   if(this.state.checkRender==1)
-   {
-     contents = this.state.result.map(function (item) {
-         return (
-             <View>
-
-                 {renderIf(item.locationno.length > 1,
-                     <VtListView
-                         location_tks_locationname= {item.location_tks_locationname}
-                         location_tks_locationdetail= {item.location_tks_locationdetail}
-                     />
-                 )}
-
-
-             </View>
-         );
+  onFetch(page = 1, callback, options) {
+    let rowArray = [];
+    Promise.resolve(API.getAllMovies(page))
+    .then((response) => {
+      this.setState({
+        movieCount:30
       });
-    }
-    return (
-      <Image source={Images.naturebg2} style={styles.backgroundImage}>
-        <ScrollView style={styles.container}>
-  <View style={Styles.bodylistview}>
-          <View style={styles.section3} >
-          { /*<Text style={styles.sectionText} >
-              {"\n\n\n"}
-            </Text> */}
-          </View>
-                   {contents}
-          </View>
-        </ScrollView>
-        </Image>
-
-    )
+      response.result.map((object) => {
+        rowArray.push(object);
+      });
+    }).then(() => {
+      if (page === Math.round(this.state.movieCount / 20)) {
+        callback(rowArray, {
+          allLoaded: true,
+        });
+      } else {
+        callback(rowArray);
+      }
+    });
+    setTimeout(() => {
+    }, 1000);
   }
-}
+
+  renderMoviesRow(rowData) {
+    return (
+
+      <Content>
+          <Card >
+              <CardItem>
+                  <Left>
+                      <Thumbnail source={{ uri: rowData.cf_774 }} />
+                      <Body>
+                          <Text>{rowData.location_tks_locationname}</Text>
+                          <Text>{rowData.province}</Text>
+                      </Body>
+                  </Left>
+                </CardItem>
+                <CardItem cardBody>
+
+                <FitImage
+                  resizeMode="contain"
+                  source={{ uri: rowData.cf_774 }}
+                    />
+
+                </CardItem>
+                <CardItem content>
+                    <Text>{rowData.location_tks_locationdetail}</Text>
+                </CardItem>
+                <CardItem>
+                    <Left>
+                        <Button transparent>
+                            <Icon active name="thumbs-up" />
+                            <Text>12 Likes</Text>
+                        </Button>
+                    </Left>
+                  <Body>
+                      <Button transparent>
+                          <Icon active name="chatbubbles" />
+                          <Text>4 Comments</Text>
+                      </Button>
+                  </Body>
+               {  /*  <Right>
+                       <Text> xx ago</Text>
+                  </Right> */ }
+                  <Right>
+                      <Button style={{backgroundColor: '#384850'}}>
+                      <Text  style={{color: '#00c497'}}> Map </Text>
+                      </Button>
+                  </Right>
+              </CardItem>
+         </Card>
+      </Content>
+    );
+  }
+
+  render() {
+    return (
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.card} >
+            <GiftedListView
+              rowView={this.renderMoviesRow}
+              onFetch={this.onFetch}
+              firstLoader={true} // display a loader for the first fetching
+              pagination={false} // enable infinite scrolling using touch to load more
+              refreshable={true} // enable pull-to-refresh for iOS and touch-to-refresh for Android
+              withSections={false} // enable sections
+              customStyles={{
+                paginationView: {
+                  backgroundColor: '#eee',
+                },
+              }}
+
+              refreshableTintColor="blue"
+            />
+          </View>
+        </View>
+      </ScrollView>
+    );
+  }
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 30
+  },
+  tabView: {
+    flex: 1,
+    marginTop: 50,
+    backgroundColor: 'rgba(0,0,0,0.01)',
+  },
+  mainContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  thumbLeft: {
+    width: 60,
+    height: 80,
+    backgroundColor: 'white',
+    marginRight: 10,
+  },
+  thumbText: {
+    fontSize: 20,
+    padding: 20,
+    justifyContent: 'center',
+  },
+  textContainer: {
+    flex: 1
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#d8d8d8'
+  },
+  title: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'bold'
+  },
+  label: {
+    color: 'black'
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    padding: 10
+  },
+  card: {
+    borderWidth: 1,
+    backgroundColor: '#fff',
+    borderColor: 'rgba(0,0,0,0.1)',
+    margin: 4,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 2, height: 2, },
+    shadowOpacity: 0.5,
+    shadowRadius: 3,
+  }
+});
