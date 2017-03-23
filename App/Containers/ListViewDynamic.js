@@ -55,7 +55,7 @@ export default class ListViewDynamic extends React.Component {
                       <Thumbnail source={{ uri: rowData.cf_774 }} />
                       <Body>
                           <Text>{rowData.location_tks_locationname}</Text>
-                          <Text>{rowData.province}</Text>
+                          <Text>{rowData.cf_772}</Text>
                       </Body>
                   </Left>
                 </CardItem>
