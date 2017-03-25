@@ -59,7 +59,6 @@ class DrawerContent extends Component {
 
   handlePressSignout = () => {
     this.toggleDrawer()
-    // FBLoginManager.logout((data))
     NavigationActions.login()
 
   }

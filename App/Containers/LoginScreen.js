@@ -56,6 +56,7 @@ class LoginScreen extends React.Component {
   state: {
     username: string,
     password: string,
+    info: null,
     visibleHeight: number,
     topLogo: {
       width: number
@@ -71,8 +72,11 @@ class LoginScreen extends React.Component {
     this.state = {
       username: '',
       password: '',
+      info: null,
       visibleHeight: Metrics.screenHeight,
-      topLogo: { width: Metrics.screenWidth }
+      topLogo: {
+        width: Metrics.screenWidth
+      }
     }
     this.LoginCheck = this.LoginCheck.bind(this)
     this.isAttempting = false
@@ -215,12 +219,24 @@ class LoginScreen extends React.Component {
       <FBLogin
        style={{ marginTop: 10 }}
        ref={(fbLogin) => { this.fbLogin = fbLogin }}
-       permissions={["email","user_friends"]}
+       permissions={["public_profile", "email"]}
        loginBehavior={FBLoginManager.LoginBehaviors.Native}
        onLogin={function(data){
-        NavigationActions.presentationScreen();
+        // NavigationActions.presentationScreen();
          console.log("Logged in!");
          console.log(data);
+         var user = data.credentials;
+         var api = `https://graph.facebook.com/v2.3/${user.userId}?fields=name,email&access_token=${user.token}`;
+
+         fetch(api)
+          .then((response) => response.json())
+          .then((responseData) => {
+            // Name and Email from Facebook
+            console.log("Name : " + responseData.name);
+            console.log("E-mail : " + responseData.email);
+
+          })
+          .done();
        }}
        onLogout={function(){
          console.log("Logged out.");
@@ -229,6 +245,18 @@ class LoginScreen extends React.Component {
         //  NavigationActions.presentationScreen();
          console.log("Existing login found.");
          console.log(data);
+         var user = data.credentials;
+         var api = `https://graph.facebook.com/v2.3/${user.userId}?fields=name,email&access_token=${user.token}`;
+
+         fetch(api)
+          .then((response) => response.json())
+          .then((responseData) => {
+            // Name and Email from Facebook
+            console.log("Name : " + responseData.name);
+            console.log("E-mail : " + responseData.email);
+
+          })
+          .done();
 
        }}
        onLoginNotFound={function(){
